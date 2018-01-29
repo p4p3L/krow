@@ -8,13 +8,14 @@ class Render{
 
 	function __construct($view_path = null, Array $params = null){
 		$this->views_path = $view_path;
-		$this->setParams($params);
+		$this->with($params);
 	}
 
-	public function setParams(Array $params = null){
+	public function with(Array $params = null){
 		if (sizeof($params)>0) {
 			$this->params = array_merge($this->params, $params);
 		}
+		return $this;
 	}
 
 	public function hasFile($view_name){
@@ -34,7 +35,7 @@ class Render{
 		if ($this->hasFile($view_name)) {
 			ob_start();
 			extract($this->params);
-			include($file_path);
+			require_once($file_path);
 			$this->context = ob_get_contents();
 			ob_end_clean();
 			return $this->context;

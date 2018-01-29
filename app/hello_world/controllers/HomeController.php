@@ -1,9 +1,6 @@
 <?php namespace Controllers;
 
-use \Lib\Http\Request as Request,
-	\Lib\Base\Controller as Controller;
-
-class HomeController extends Controller{
+class HomeController extends \Controller{
 	
 	public function index(){
 		return view()->make('home');
@@ -13,7 +10,7 @@ class HomeController extends Controller{
 		return $name;
 	}
 
-	public function save(Request $request, $id){
+	public function save(\Request $request, $id){
 		print_r( $request );
 		return $id;
 	}

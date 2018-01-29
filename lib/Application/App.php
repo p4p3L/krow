@@ -1,14 +1,12 @@
 <?php namespace Lib\Application;
 
-use \Lib\Route\Router as Router;
-
 class App{
 
 	protected $providers = [];
 	protected $app_path = null;
 	protected $response = null;
 
-	function __construct(Router $route, $app_path = null){
+	function __construct(\Router $route, $app_path = null){
 		$this->app_path = $app_path;
 		$this->setProvider('route', $route);
 	}
@@ -17,7 +15,7 @@ class App{
 		return $this->getProvider($provider_name);
 	}
 
-	public function response($write = false){
+	public function getResponse($write = false){
 		if ($write == true) {
 			echo $this->response;
 		}else{

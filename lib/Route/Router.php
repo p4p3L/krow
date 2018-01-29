@@ -1,7 +1,5 @@
 <?php namespace Lib\Route;
 
-use \Lib\Http\Request as Request;
-
 class Router{
 
 	public $routes = [];
@@ -9,7 +7,7 @@ class Router{
 	protected $request;
 	protected $handle = false;
 
-	function __construct(Request $request){
+	function __construct(\Request $request){
 		$this->request = $request;
 	}
 
@@ -48,7 +46,7 @@ class Router{
 	}
 
 	public function run(){
-		if ($this->request instanceof Request) {
+		if ($this->request instanceof \Request) {
 			$routes = $this->routes[$this->request->method];
 			foreach ($routes as $key => $route) {
 				if (preg_match($route['uri'], $this->request->url['path'])) {
