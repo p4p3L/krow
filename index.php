@@ -8,7 +8,7 @@ require_once(ROOT.'/init/boot.php');
 $app = new App(new Router(new Request), APP_PATH);
 
 $app->route->addGet('/', function(){
-	return Home::run('index');
+	return Home::run('index',[['title' => 'Home Page']]);
 });
 
 $app->route->addGet('/write/([a-z]+)', function($name){

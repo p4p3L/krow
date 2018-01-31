@@ -4,7 +4,7 @@ require_once('const.php');
 require_once('funcs.php');
 $aliases = require_once('aliases.php');
 
-function __autoload($class){
+function __autoload($class){	
 	$parts = explode('\\', $class);
 	$parts[0] = strtolower($parts[0]);
 	$path_prefix = $parts[0];

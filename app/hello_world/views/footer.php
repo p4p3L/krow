@@ -1,2 +1,4 @@
+{@scripts}
 </body>
 </html>
+{@footer}

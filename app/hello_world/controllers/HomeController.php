@@ -2,8 +2,8 @@
 
 class HomeController extends \Controller{
 	
-	public function index(){
-		return view()->make('home');
+	public function index(Array $params = null){
+		return view($params)->make('home');
 	}
 
 	public function write($name){

@@ -1,6 +1,5 @@
 <?php 
 
-
 function view(Array $params = null){
 	return new Render(APP_PATH.'/views', $params);
 }
@@ -13,5 +12,8 @@ function viewGet($view_name, Array $params = null){
 	}
 }
 
+function cache(){
+	return new FileCache(VAR_ROOT.'/caches');
+}
 
 ?>
