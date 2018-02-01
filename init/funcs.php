@@ -16,4 +16,8 @@ function cache(){
 	return new FileCache(VAR_ROOT.'/caches');
 }
 
+function db(){
+	return DB::getInstance();
+}
+
 ?>

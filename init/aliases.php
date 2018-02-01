@@ -15,7 +15,9 @@ return [
 	'Render' => '\\Lib\\View\\Render',
 	'ViewCompiler' => '\\Lib\\View\\ViewCompiler',
 
-	'FileCache' => '\\Lib\\Cache\\FileCache'
+	'FileCache' => '\\Lib\\Cache\\FileCache',
+	
+	'DB' => '\\Lib\\Database\\PDO\\DB'
 ];
 
 ?>

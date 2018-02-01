@@ -33,7 +33,7 @@ class Render extends ViewCompiler{
 		$this->context = preg_replace(self::P_SPACE, '><', $this->context);
 	}
 
-	public function render(){
+	public function compile(){
 		$this->toImport();
 		$this->toString();
 		$this->toSpaces();
@@ -50,7 +50,7 @@ class Render extends ViewCompiler{
 
 	public function make($view_name, $dump = true){
 		$this->getContext($view_name);
-		$this->render();
+		$this->compile();
 		if ($dump == true) {
 			echo $this->context;
 		}else{

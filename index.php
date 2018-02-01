@@ -1,5 +1,7 @@
 <?php //error_reporting(~E_ALL);
 
+define('ENVIRONMENT', 'development'); // production, development
+
 define('ROOT', dirname(__FILE__));
 define('APP_PATH', ROOT.'/app/hello_world');
 
