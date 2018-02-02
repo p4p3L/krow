@@ -1,5 +1,5 @@
 <?php 
-	
+
 define('APP_ROOT', ROOT.'/app');
 define('INIT_ROOT', ROOT.'/init');
 define('LIB_ROOT', ROOT.'/lib');

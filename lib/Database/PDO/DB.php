@@ -2,7 +2,7 @@
 
 class DB {
     
-    private static $instance; 
+    private static $instance;
     
     private function __construct(){}
     

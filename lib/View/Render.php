@@ -39,23 +39,21 @@ class Render extends ViewCompiler{
 		$this->toSpaces();
 	}
 
-	public function makeCache($view_name){
+	public function makeCache($view_name, $compile = true){
 		$cache = cache();
 		$cache_name = md5($view_name);
 		if ($cache->expireCache($cache_name)) {
-			$cache->setCache($cache_name, $this->make($view_name, false));
+			$cache->setCache($cache_name, $this->make($view_name, false, $compile));
 		}
-		echo $cache->getCache($cache_name);
+		return $cache->getCache($cache_name);
 	}
 
-	public function make($view_name, $dump = true){
+	public function make($view_name, $compile = true){
 		$this->getContext($view_name);
-		$this->compile();
-		if ($dump == true) {
-			echo $this->context;
-		}else{
-			return $this->context;
+		if ($compile == true) {
+			$this->compile();
 		}
+		return $this->context;
 	}
 
 }

@@ -2,15 +2,15 @@
 
 class HomeController extends \Controller{
 	
-	public function index(Array $params = null){
+	public function indexAction(Array $params = null){
 		return view($params)->make('home');
 	}
 
-	public function write($name){
+	public function writeAction($name){
 		return $name;
 	}
 
-	public function save(\Request $request, $id){
+	public function saveAction(\Request $request, $id){
 		print_r( $request );
 		return $id;
 	}

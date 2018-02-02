@@ -1,8 +1,13 @@
 <?php //error_reporting(~E_ALL);
 
-define('ENVIRONMENT', 'development'); // production, development
+/*
+* ENVIRONMENT - It can be takes two value. This values are development and production.
+* If you develop on localhost use development and if your porject was published use production.
+*
+*/
+define('ENVIRONMENT', 'development');
 
-define('ROOT', dirname(__FILE__));
+define('ROOT', getcwd());
 define('APP_PATH', ROOT.'/app/hello_world');
 
 require_once(ROOT.'/init/boot.php');
@@ -10,7 +15,9 @@ require_once(ROOT.'/init/boot.php');
 $app = new App(new Router(new Request), APP_PATH);
 
 $app->route->addGet('/', function(){
-	return Home::run('index',[['title' => 'Home Page']]);
+	//return Home::run('index',[['title' => 'Home Page']]);
+	return Home::index(['title' => 'Home Page']);
+	//$home = new Home();	return $home->index(['title' => 'Home Page']);
 });
 
 $app->route->addGet('/write/([a-z]+)', function($name){

@@ -4,10 +4,14 @@ class Controller{
 
 	protected static $instance = null;
 
-	private function __construct(){}
+	public function __call($method_name, $args){
+		$method_name .= 'Action';
+		return self::run($method_name, $args);
+	}
 
-	static function __callStatic($name, $args){
-		return self::run($name, $args);
+	static function __callStatic($method_name, $args){
+		$method_name .= 'Action';
+		return self::run($method_name, $args);
 	}
 
 	public static function getInstance(){
