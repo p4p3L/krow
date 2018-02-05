@@ -1,5 +1,7 @@
 <?php
 
+define('APP_NAME', 'hello_world');
+
 require_once(getcwd().'/init/start.php');
 
 $app = new App(new Router(new Request), APP_PATH);

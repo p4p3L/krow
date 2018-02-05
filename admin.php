@@ -1,26 +1,24 @@
 <?php
 
+define('APP_NAME', 'hello_world_admin');
+
 require_once(getcwd().'/init/start.php');
 
 $app = new App(new Router(new Request), APP_PATH);
 
-// Rules
 $app->route->addRule('/yonetim/(?!login)(.*)', function(){
-	if (user()->isOnline() != true) {
-		Redirect::to('/yonetim/login');
+	if (user()->isOnline() == true) {
+		return true;
 	}
-	return true;
+	Redirect::to('/yonetim/login');
 });
 
-// Routes
 $app->route->addGet('/yonetim/dashboard', function(){
-	//return Home::run('index',[['title' => 'Home Page']]);
-	//return Home::index(['title' => 'Admin Home Page']);
-	//$home = new Home(); return $home->index(['title' => 'Home Page']);
+	return Admin::index(['title' => 'Dashboard']);
 });
 
 $app->route->addGet('/yonetim/login', function(){
-	return 'Login';
+	return Admin::login(['title' => 'Dashboard']);
 });
 
 $app->dispatch();

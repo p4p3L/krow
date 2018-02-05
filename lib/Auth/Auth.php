@@ -30,14 +30,13 @@ class Auth{
 	}
 
 	public function isLogged(){
-		if (isset($_SESSION['auth']) && $_SESSION['auth']['logged']) {
+		if (isset($_SESSION['auth']) && $_SESSION['auth']['logged'] == true) {
 			return true;
 		}
 		return false;
 	}
 
 	public function isExpired(){
-		echo "expire run. \n";
 		$expire = time()-$_SESSION['auth']['last_access_time'];
 		if ($expire<300) {
 			$_SESSION['auth']['last_access_time'] = time();
