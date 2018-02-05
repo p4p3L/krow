@@ -21,11 +21,14 @@ class Controller{
 		return self::$instance;
 	}
 
-	public static function run($method_name, Array $params = null){
-		if (sizeof($params)>0) {
-			return call_user_func_array([self::getInstance(), $method_name], $params);
+	final public static function run($method_name, Array $params = null){
+		if (method_exists(self::getInstance(), $method_name)) {
+			if (sizeof($params)>0) {
+				return call_user_func_array([self::getInstance(), $method_name], $params);
+			}
+			return call_user_func([self::getInstance(), $method_name]);
 		}
-		return call_user_func([self::getInstance(), $method_name]);
+		return false;
 	}
 
 }

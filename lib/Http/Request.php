@@ -10,7 +10,7 @@ class Request{
 	public $requests = [];
 
 	function __construct(){
-		$this->script = str_replace('index.php', '', $_SERVER['SCRIPT_NAME']);
+		$this->script = SCRIPT_NAME;
 		$this->method = $_SERVER['REQUEST_METHOD'];
 		$this->uri = str_replace($this->script, '/', $_SERVER['REQUEST_URI']);
 		$this->url = parse_url($this->uri);

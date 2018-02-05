@@ -4,7 +4,9 @@
 *	USER ALIASES
 */
 return [
-	'Home' => '\\Controllers\\HomeController'
+	'Home' => '\\Controllers\\HomeController',
+	
+	'User' => '\\Controllers\\UserController'
 ];
 
 ?>

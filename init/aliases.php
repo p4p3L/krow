@@ -7,6 +7,7 @@ return [
 	'App' => '\\Lib\\Application\\App',
 
 	'Request' => '\\Lib\\Http\\Request',
+	'Redirect' => '\\Lib\\Http\\Redirect',
 
 	'Router' => '\\Lib\\Route\\Router',
 
@@ -16,6 +17,8 @@ return [
 	'ViewCompiler' => '\\Lib\\View\\ViewCompiler',
 
 	'FileCache' => '\\Lib\\Cache\\FileCache',
+
+	'Auth' => '\\Lib\\Auth\\Auth',
 	
 	'DB' => '\\Lib\\Database\\PDO\\DB'
 ];
