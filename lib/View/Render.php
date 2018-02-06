@@ -3,8 +3,9 @@
 class Render extends ViewCompiler{
 
 	const P_VAR = '#{(\w+)}#';
-	const P_IMPORT = '#{@(\w+)}#';
+	const P_IMPORT = '#{@([a-zA-Z0-9-_\/]+)}#';
 	const P_SPACE = '#>\s+<#';
+	const P_FUNC = '#{(\w+)@([a-zA-Z0-9-_\/\.]+)}#';
 
 	function __construct($view_path = null, Array $params = null){
 		parent::__construct($view_path, $params);
@@ -33,10 +34,23 @@ class Render extends ViewCompiler{
 		$this->context = preg_replace(self::P_SPACE, '><', $this->context);
 	}
 
+	private function toFunc(){
+		if (preg_match(self::P_FUNC, $this->context)){
+			preg_match_all(self::P_FUNC, $this->context, $funcs, PREG_SET_ORDER);
+			foreach ($funcs as $key => $func) {
+				$keys[$key] = $func[0];
+				$data[$key] = call_user_func_array($func[1], (array)$func[2]);
+			}
+			$this->context = str_replace($keys, $data, $this->context);
+		}
+	}
+
 	public function compile(){
-		$this->toImport();
 		$this->toString();
+		$this->toImport();
+		$this->toFunc();
 		$this->toSpaces();
+		$this->toString();
 	}
 
 	public function makeCache($view_name, $compile = true){

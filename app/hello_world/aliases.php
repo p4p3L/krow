@@ -6,7 +6,9 @@
 return [
 	'Home' => '\\Controllers\\HomeController',
 	
-	'User' => '\\Controllers\\UserController'
+	'User' => '\\Controllers\\UserController',
+
+	'Admin' => '\\Controllers\\AdminController'
 ];
 
 ?>

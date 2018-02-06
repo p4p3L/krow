@@ -11,6 +11,8 @@ session_start();
 */
 define('ENVIRONMENT', 'development');
 
+define('APP_NAME', 'hello_world');
+
 require_once(dirname(__FILE__).'/boot.php');
 
 ?>

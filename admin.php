@@ -1,7 +1,5 @@
 <?php
 
-define('APP_NAME', 'hello_world_admin');
-
 require_once(getcwd().'/init/start.php');
 
 $app = new App(new Router(new Request), APP_PATH);
@@ -14,11 +12,11 @@ $app->route->addRule('/yonetim/(?!login)(.*)', function(){
 });
 
 $app->route->addGet('/yonetim/dashboard', function(){
-	return Admin::index(['title' => 'Dashboard']);
+	return Admin::index();
 });
 
 $app->route->addGet('/yonetim/login', function(){
-	return Admin::login(['title' => 'Dashboard']);
+	return Admin::login();
 });
 
 $app->dispatch();
@@ -29,3 +27,4 @@ $app->getResponse(true);
 //print_r( $_SERVER );
 
 ?>
+

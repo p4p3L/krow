@@ -15,9 +15,10 @@ class Router{
 	public function getResponse(){
 		$handle = $this->getHandle();
 		if ($handle !== false) {
-			preg_match_all($handle['uri'], $this->request->url['path'], $matches, PREG_PATTERN_ORDER);
-			if (isset($matches[1])) {
-				$handle['params'] = $matches[1];
+			preg_match_all($handle['uri'], $this->request->url['path'], $matches, PREG_SET_ORDER);
+			if (isset($matches[0])) {
+				unset($matches[0][0]);
+				$handle['params'] = array_values($matches[0]);
 			}
 			$reflection = new \ReflectionFunction($handle['callback']);
 			$params = $reflection->getParameters();

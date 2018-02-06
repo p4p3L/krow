@@ -12,7 +12,7 @@ class ViewCompiler{
 	}
 
 	public function getFilePath($view_name){
-		return $this->views_path."/$view_name.php";
+		return $this->views_path."/$view_name";
 	}
 
 	public function hasFile($view_name){

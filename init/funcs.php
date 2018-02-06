@@ -16,4 +16,8 @@ function user(){
 	return User::getAuth();
 }
 
+function assets($file_path){
+	return WEB_ROOT.'public/assets/'.$file_path;
+}
+
 ?>
