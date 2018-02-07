@@ -12,6 +12,9 @@ class ViewCompiler{
 	}
 
 	public function getFilePath($view_name){
+		if (!preg_match('/\.([a-zA-Z0-9])/', $view_name)) {
+			$view_name .= '.php';
+		}
 		return $this->views_path."/$view_name";
 	}
 

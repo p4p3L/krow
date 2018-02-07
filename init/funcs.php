@@ -4,8 +4,8 @@ function view(Array $params = null){
 	return new Render(APP_PATH.'/views', $params);
 }
 
-function cache(){
-	return new FileCache(VAR_ROOT.'/caches');
+function cache($cache_expire = 60){
+	return new FileCache(VAR_ROOT.'/caches', $cache_expire);
 }
 
 function db(){

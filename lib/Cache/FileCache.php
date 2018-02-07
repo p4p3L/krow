@@ -7,12 +7,13 @@ class FileCache{
 	protected $cache_path;
 	protected $cache_expire = 60;
 
-	function __construct($cache_path = null){
+	function __construct($cache_path = null, $cache_expire = 60){
 		$this->cache_path = $cache_path;
 		if (!is_dir($this->cache_path)) {
 			mkdir($this->cache_path);
 			chmod($this->cache_path, 0755);
 		}
+		$this->cache_expire = $cache_expire;
 		$this->compiler = new \ViewCompiler($this->cache_path);
 	}
 
@@ -31,7 +32,7 @@ class FileCache{
 
 	public function expireCache($cache_key){
 		$cache_file = $this->getCacheFilePath($cache_key);
-		return (filemtime($cache_file)<(time()-$this->cache_expire)) ? true : false;
+		return (@filemtime($cache_file)<(time()-$this->cache_expire)) ? true : false;
 	}
 
 	public function getCacheFilePath($cache_key){

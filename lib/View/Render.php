@@ -53,8 +53,8 @@ class Render extends ViewCompiler{
 		$this->toString();
 	}
 
-	public function makeCache($view_name, $compile = true){
-		$cache = cache();
+	public function makeCache($view_name, $compile = true, $cache_expire = 60){
+		$cache = cache($cache_expire);
 		$cache_name = md5($view_name);
 		if ($cache->expireCache($cache_name)) {
 			$cache->setCache($cache_name, $this->make($view_name, false, $compile));

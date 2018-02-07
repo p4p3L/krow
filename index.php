@@ -10,14 +10,17 @@ $app->route->addGet('/', function(){
 
 $app->route->addGet('/public/([a-zA-Z0-9-_\/]+\.+([a-z]+))', function($file_path, $ext){
 	$file = PUBLIC_ROOT.'/'.$file_path;
-	/*
-	if (is_file($file)) {
+	$allowed_exts = [
+		'jpg','png','gif',
+		'txt','xml','json','pdf',
+		'css','js'
+	];
+	if (is_file($file) && in_array($ext, $allowed_exts)) {
 		header("content-type:text/$ext; charset=utf8");
-		return file_get_contents($file);
+		$render = new Render(PUBLIC_ROOT);
+		return $render->makeCache($file_path, true, 0);
 	}
-	*/
-	$render = new Render(PUBLIC_ROOT);
-	return $render->make($file_path, false);
+	exit(json_encode(['error' => 'Invalid Request']));
 });
 
 $app->route->addGet('/write/([a-z]+)', function($name){
