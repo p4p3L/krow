@@ -3,7 +3,7 @@
 class HomeController extends \Controller{
 	
 	public function indexAction(){
-		return view()->make('home.php');
+		return view()->make('home');
 	}
 
 	public function writeAction($name){

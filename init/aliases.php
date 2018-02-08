@@ -20,7 +20,9 @@ return [
 
 	'Auth' => '\\Lib\\Auth\\Auth',
 	
-	'DB' => '\\Lib\\Database\\PDO\\DB'
+	'DB' => '\\Lib\\Database\\PDO\\DB',
+
+	'Mime' => '\\Lib\\Mime\\Mime'
 ];
 
 ?>

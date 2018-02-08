@@ -3,21 +3,19 @@
 class AdminController extends \Controller{
 	
 	public function indexAction(){
-		return view()->with([
+		return view([
 			'title' 		=> 'Dashboard',
 			'page_title' 	=> 'Dashboard',
 			'page'			=> 'admin/pages/dashboard'
-		])
-		->make('admin/master.php');
+		])->make('admin/master');
 	}
 
 	public function loginAction(){
-		return view()->with([
+		return view([
 			'title' 		=> 'Login',
 			'page_title' 	=> 'Login',
 			'page'			=> 'admin/pages/login'
-		])
-		->make('admin/master.php');
+		])->make('admin/master');
 	}
 
 }

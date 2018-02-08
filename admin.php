@@ -5,7 +5,7 @@ require_once(getcwd().'/init/start.php');
 $app = new App(new Router(new Request), APP_PATH);
 
 $app->route->addRule('/yonetim/(?!login)(.*)', function(){
-	if (user()->isOnline() == true) {
+	if (user()->isOnline() == true) {	
 		return true;
 	}
 	Redirect::to('/yonetim/login');

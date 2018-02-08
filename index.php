@@ -4,10 +4,6 @@ require_once(getcwd().'/init/start.php');
 
 $app = new App(new Router(new Request), APP_PATH);
 
-$app->route->addGet('/', function(){
-	return Home::index(['title' => 'Home Page']);
-});
-
 $app->route->addGet('/public/([a-zA-Z0-9-_\/]+\.+([a-z]+))', function($file_path, $ext){
 	$file = PUBLIC_ROOT.'/'.$file_path;
 	$allowed_exts = [
@@ -15,24 +11,18 @@ $app->route->addGet('/public/([a-zA-Z0-9-_\/]+\.+([a-z]+))', function($file_path
 		'txt','xml','json','pdf',
 		'css','js'
 	];
-	if (is_file($file) && in_array($ext, $allowed_exts)) {
-		header("content-type:text/$ext; charset=utf8");
-		$render = new Render(PUBLIC_ROOT);
-		return $render->makeCache($file_path, true, 0);
+	if (file_exists($file) && in_array($ext, $allowed_exts)){
+		header('Content-Type:'.(Mime::byExt($ext)).'; charset=utf8');
+	}else{
+		header('Content-Type:image/gif; charset=utf8');
+		$file_path = 'assets/images/404.gif';
 	}
-	exit(json_encode(['error' => 'Invalid Request']));
+	$render = new Render(PUBLIC_ROOT);
+	return $render->makeCache($file_path, true, 0);
 });
 
-$app->route->addGet('/write/([a-z]+)', function($name){
-	return Home::run('write', [$name]);
-});
-
-$app->route->addGet('/save/([0-9]+)', function(Request $request, $post_id){
-	return Home::run('save', [$request, $post_id]);
-});
-
-$app->route->addPost('/ajax/([a-z]+)', function(Request $request){
-	return Home::run('save', [$request]);
+$app->route->addGet('/', function(){
+	return Home::index(['title' => 'Home Page']);
 });
 
 $app->dispatch();
