@@ -3,10 +3,9 @@
 class Auth{
 
 	protected $session = null;
-	protected $is_online = false;
 
 	function __construct(){
-		if ($this->isOnline()) {
+		if ($this->isOnline() == true) {
 			$this->assignCurrentSession();
 		}
 	}
@@ -26,7 +25,11 @@ class Auth{
 
 	public function logout($url = '/'){
 		unset($_SESSION['auth']);
-		Redirect::to($url);
+		\Redirect::to($url);
+	}
+
+	public function isAdmin(){
+		return $_SESSION['auth']['admin'];
 	}
 
 	public function isLogged(){
@@ -48,8 +51,9 @@ class Auth{
 	public function isOnline(){
 		if ($this->isLogged()) {
 			if ($this->isExpired() != true) {
-				$this->is_session = true;
 				return true;
+			}else{
+				$this->logout();
 			}
 		}
 		return false;

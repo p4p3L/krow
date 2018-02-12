@@ -2,8 +2,11 @@
 
 class Redirect{
 
-	public static function buildUrl($url){
-		return rtrim(WEB_ROOT, '/').$url.'?'.self::getQueries();
+	protected $param = null;
+
+	public static function buildUrl($url, $tails = true){
+		$real_url = rtrim(WEB_ROOT, '/').$url;
+		return ($tails == true) ? $real_url.'?'.self::getQueries() : $real_url;
 	}
 
 	public static function getQueries(){
@@ -18,13 +21,16 @@ class Redirect{
 		return http_build_query($tails);
 	}
 
-	public static function to($url = '/', $status = 303){
-		header('Location: '.self::buildUrl($url), true, $status);
+	public static function to($url = '/', $status = 303, Array $params = null, $tails = true){
+		if (sizeof($params>0)) {
+			$_SESSION['view_params'] = $params;
+		}
+		header('Location: '.self::buildUrl($url, $tails), true, $status);
     	exit();
 	}
 	
-	public static function refresh($url = '/', $sec = 3){
-		header('Refresh:'.$sec.'; url='.self::buildUrl($url));
+	public static function refresh($url = '/', $sec = 3, $tails = true){
+		header('Refresh:'.$sec.'; url='.self::buildUrl($url, $tails));
 		exit();
 	}
 }

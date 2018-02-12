@@ -57,7 +57,7 @@ class Render extends ViewCompiler{
 		$cache = cache($cache_expire);
 		$cache_name = md5($view_name);
 		if ($cache->expireCache($cache_name)) {
-			$cache->setCache($cache_name, $this->make($view_name, false, $compile));
+			$cache->setCache($cache_name, $this->make($view_name, $compile));
 		}
 		return $cache->getCache($cache_name);
 	}

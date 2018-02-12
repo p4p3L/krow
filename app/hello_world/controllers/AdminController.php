@@ -2,7 +2,7 @@
 
 class AdminController extends \Controller{
 	
-	public function indexAction(){
+	public function dashboard(){
 		return view([
 			'title' 		=> 'Dashboard',
 			'page_title' 	=> 'Dashboard',

@@ -32,7 +32,7 @@ class App{
 			}
 			$this->response = $route->getResponse();
 		} catch (\Exception $e) {
-			$this->response = $e->getMessage();
+			return $this->response = $e->getMessage();
 		}
 	}
 

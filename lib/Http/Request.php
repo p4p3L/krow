@@ -14,13 +14,18 @@ class Request{
 		$this->method = $_SERVER['REQUEST_METHOD'];
 		$this->uri = str_replace($this->script, '/', $_SERVER['REQUEST_URI']);
 		$this->url = parse_url($this->uri);
-		if (isset($this->url['query'])) {
-			$this->requests = $_REQUEST;
-		}
+		$this->requests = $_REQUEST;
 	}
 
-	public function getRequests(){
-		return $this->requests;
+	function __get($key){
+		if (in_array($key, ['post', 'get', 'request'])) {
+			return $this->getRequests($key);
+		}
+		return $this->{$key};
+	}
+
+	public function getRequests($key = null){
+		return isset($this->requests[$key]) && !is_null($key) ? $this->requests[$key] : $this->requests;
 	}
 
 	public function getUri(){
@@ -30,7 +35,6 @@ class Request{
 	public function getUrl(){
 		return $this->url;
 	}
-	
 }
 
 ?>

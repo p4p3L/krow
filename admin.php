@@ -5,14 +5,14 @@ require_once(getcwd().'/init/start.php');
 $app = new App(new Router(new Request), APP_PATH);
 
 $app->route->addRule('/yonetim/(?!login)(.*)', function(){
-	if (user()->isOnline() == true) {	
+	if (user()->isOnline() && user()->isAdmin()) {
 		return true;
 	}
 	Redirect::to('/yonetim/login');
 });
 
 $app->route->addGet('/yonetim/dashboard', function(){
-	return Admin::index();
+	return Admin::dashboard();
 });
 
 $app->route->addGet('/yonetim/login', function(){

@@ -8,12 +8,12 @@ class DB {
     
     private function __clone(){}
 
-    public static function select($sql){
-    	return self::getInstance()->query($sql, \PDO::FETCH_ASSOC);
+    public static function rows($sql){
+    	return self::getInstance()->query($sql)->fetchAll();
     }
 
-    public static function one($sql){
-    	return self::getInstance()->query($sql)->fetch(\PDO::FETCH_ASSOC);
+    public static function row($sql){
+    	return self::getInstance()->query($sql)->fetch();
     }
 
     public static function query($sql, Array $params = null){
@@ -40,6 +40,8 @@ class DB {
     		$dsn = 'mysql:host='.$db['db_host'].';dbname='.$db['db_name'];
             self::$instance = new \PDO($dsn, $db['db_user'], $db['db_pass']); 
             self::$instance->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION); 
+            self::$instance->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
+            //self::$instance->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_OBJ);
         }
         return self::$instance; 
     }
