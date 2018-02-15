@@ -23,7 +23,7 @@ class Redirect{
 
 	public static function to($url = '/', $status = 303, Array $params = null, $tails = true){
 		if (sizeof($params>0)) {
-			$_SESSION['view_params'] = $params;
+			session('view_params', $params)->set();
 		}
 		header('Location: '.self::buildUrl($url, $tails), true, $status);
     	exit();

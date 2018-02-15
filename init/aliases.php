@@ -22,7 +22,9 @@ return [
 	
 	'DB' => '\\Lib\\Database\\PDO\\DB',
 
-	'Mime' => '\\Lib\\Mime\\Mime'
+	'Mime' => '\\Lib\\Mime\\Mime',
+
+	'Session' => '\\Lib\\Session\\Session'
 ];
 
 ?>

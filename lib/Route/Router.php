@@ -2,7 +2,7 @@
 
 class Router{
 
-	protected $request;
+	public $request;
 	protected $handle = false;
 
 	public $rules = [];

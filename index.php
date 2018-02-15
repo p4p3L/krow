@@ -2,10 +2,16 @@
 
 require_once(getcwd().'/init/start.php');
 
+print_r( $_SESSION );
+
 $app = new App(new Router(new Request), APP_PATH);
 
 $app->route->addGet('/', function(){
 	return Home::index();
+});
+
+$app->route->addGet('/test', function(){
+	echo "<h1>Test</h1>\n";
 });
 
 $app->route->addGet('/login', function(){
@@ -13,20 +19,17 @@ $app->route->addGet('/login', function(){
 });
 
 $app->route->addPost('/user/login', function(Request $request){
-	if (user()->isOnline()){
-		$login = User::doLogin($request);
-		if ($login) {
-			if ($login['id'] >= 0) {
-				$login['admin'] = false;
-				$login['logged'] = true;
-				$login['last_access_time'] = time();
-				user()->setSession($login);
-				Redirect::to('/', 303, ['login_response' => true, 'login_message' => 'Giriş Başarılı'], false);
-			}
+	$login = User::doLogin($request);
+	if ($login) {
+		if ($login['id'] >= 0) {
+			$login['admin'] = false;
+			$login['logged'] = true;
+			$login['last_access_time'] = time();
+			user()->setSession($login);
+			Redirect::to('/', 303, ['login_response' => true, 'login_message' => 'Giriş Başarılı'], false);
 		}
-		Redirect::to('/login', 303, ['login_response' => false, 'login_message' => 'Giriş Başarısız'], false);
 	}
-	Redirect::to('/');
+	Redirect::to('/login', 303, ['login_response' => false, 'login_message' => 'Giriş Başarısız'], false);
 });
 
 $app->route->addGet('/public/([a-zA-Z0-9-_\/]+\.+([a-z]+))', function($file_path, $ext){

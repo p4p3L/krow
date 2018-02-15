@@ -3,46 +3,48 @@
 class Auth{
 
 	protected $session = null;
+	protected $session_data = null;
 
 	function __construct(){
+		$this->session = new \Session('auth');
 		if ($this->isOnline() == true) {
 			$this->assignCurrentSession();
 		}
 	}
 
 	public function getSession(){
-		return $this->session;
+		return $this->session_data;
 	}
 
 	public function setSession(Array $settings = null){
-		$_SESSION['auth'] = $settings;
-		$this->session = $_SESSION['auth'];
+		$this->session->with($settings);
+		$this->session_data = $settings;
 	}
 
 	public function assignCurrentSession(){
-		$this->setSession($_SESSION['auth']);
+		$this->setSession($this->session->get());
 	}
 
 	public function logout($url = '/'){
-		unset($_SESSION['auth']);
+		$this->session->destroy();
 		\Redirect::to($url);
 	}
 
 	public function isAdmin(){
-		return $_SESSION['auth']['admin'];
+		return $this->session->admin == true ? true : false;
 	}
 
 	public function isLogged(){
-		if (isset($_SESSION['auth']) && $_SESSION['auth']['logged'] == true) {
+		if ($this->session->exists() && $this->session->logged == true) {
 			return true;
 		}
 		return false;
 	}
 
 	public function isExpired(){
-		$expire = time()-$_SESSION['auth']['last_access_time'];
+		$expire = time()-$this->session->last_access_time;
 		if ($expire<300) {
-			$_SESSION['auth']['last_access_time'] = time();
+			$this->session->last_access_time = time();
 			return false;
 		}
 		return true;

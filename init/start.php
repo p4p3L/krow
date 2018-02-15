@@ -1,7 +1,8 @@
 <?php
 
-error_reporting(E_ALL && ~E_NOTICE);
+error_reporting(E_ALL && ~E_NOTICE && ~E_WARNING);
 
+ob_start('ob_gzhandler');
 session_start();
 
 /*

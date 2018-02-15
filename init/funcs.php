@@ -1,9 +1,10 @@
 <?php 
 
 function view(Array $params = null){
-	if (sizeof($_SESSION['view_params'])>0) {
-		$params = array_merge((array)$params, $_SESSION['view_params']);
-		unset($_SESSION['view_params']);
+	$sess = session('view_params')->get();
+	if (sizeof($sess)>0) {
+		$params = array_merge((array)$params, $sess);
+		unset($sess);
 	}
 	return new Render(APP_PATH.'/views', $params);
 }
@@ -17,7 +18,7 @@ function db(){
 }
 
 function user(){
-	return User::getAuth();
+	return new \Auth();
 }
 
 function assets($file_path){
@@ -25,7 +26,15 @@ function assets($file_path){
 }
 
 function esc($str){
-	return addslashes(trim($str));
+	return addslashes(mysql_escape_string($str));
 }
 
+function session($key = null, $opts = null){
+	return new Session($key, $opts);
+}
+
+function old($key){
+	$r = $GLOBALS['app']->request;
+	return isset($r->request[$key]) ? $r->request[$key] : '';
+}
 ?>

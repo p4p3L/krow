@@ -2,6 +2,10 @@
 
 require_once(getcwd().'/init/start.php');
 
+if (session('secret_key')->exists() == false) {
+	Redirect::to('/');
+}
+
 $app = new App(new Router(new Request), APP_PATH);
 
 $app->route->addRule('/yonetim/(?!login)(.*)', function(){

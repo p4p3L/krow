@@ -6,10 +6,10 @@
 			<?php if ($login_response == false){ echo "<p>$login_message</p>"; } ?>
 			<form id="loginForm" method="post" action="/krow/user/login">
 				<div class="wrapper">
-					<input class="text-input" type="text" name="username" placeholder="Kullanıcı Adı">
+					<input class="text-input" type="text" name="username" placeholder="Kullanıcı Adı" value="<?php echo old('username'); ?>">
 				</div>
 				<div class="wrapper">
-					<input class="text-input" type="text" name="password" placeholder="Şifre...">
+					<input class="text-input" type="text" name="password" placeholder="Şifre..." value="<?php echo old('password'); ?>">
 				</div>
 				<input class="button" type="submit" value="Giriş Yap">
 			</form>

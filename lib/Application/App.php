@@ -9,6 +9,7 @@ class App{
 	function __construct(\Router $route, $app_path = null){
 		$this->app_path = $app_path;
 		$this->setProvider('route', $route);
+		$this->setProvider('request', $route->request);
 	}
 
 	function __get($provider_name){
